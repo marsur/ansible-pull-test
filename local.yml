@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+    - name: Záloha crontabu používateľa
+      ansible.builtin.cron:
+        name: "zaloha crontabu"
+        user: "{{ cron_user | default(ansible_user_id) }}"
+        minute: "1"
+        hour: "0"
+        weekday: "2"
+        job: 'crontab -l > $HOME/zaloha.txt'
